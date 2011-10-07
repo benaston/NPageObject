@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FAD1C56E-9D65-4EF0-90D1-36A50418B563}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NPageObject</RootNamespace>
+    <AssemblyName>NPageObject</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Staging\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\NPageObject.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NHelpfulException">
+      <HintPath>..\packages\NHelpfulException.1.0.4292.35244\lib\net40\NHelpfulException.dll</HintPath>
+    </Reference>
+    <Reference Include="NSure">
+      <HintPath>..\packages\NSure.1.0.4292.35410\lib\net40\NSure.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.mocks, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="pnunit.framework">
+      <HintPath>..\packages\NUnit.2.5.10.11092\lib\pnunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BrowserSessionScope.cs" />
+    <Compile Include="CssSelector.cs" />
+    <Compile Include="Current.cs" />
+    <Compile Include="CurrentPage.cs" />
+    <Compile Include="DesiredSelectionSpeed.cs" />
+    <Compile Include="ElementVisibility.cs" />
+    <Compile Include="Exceptions\GGHyperlinkNotFoundException.cs" />
+    <Compile Include="Exceptions\GGPageObjectElementNotFoundException.cs" />
+    <Compile Include="Exceptions\GGPageTextNotFoundException.cs" />
+    <Compile Include="ICurrentPageAware.cs" />
+    <Compile Include="IHaveMutableUrl.cs" />
+    <Compile Include="IHaveUITestContext.cs" />
+    <Compile Include="IPageObject.cs" />
+    <Compile Include="IPageObjectElement.cs" />
+    <Compile Include="IPageObjectElementExtensions.cs" />
+    <Compile Include="IPageObjectElementSimple.cs" />
+    <Compile Include="IPageObjectExtensions.cs" />
+    <Compile Include="IBrowserActionPerformer.cs" />
+    <Compile Include="IDomChecker.cs" />
+    <Compile Include="IUITestContext.cs" />
+    <Compile Include="IUITestContext`1.cs" />
+    <Compile Include="JourneyDelegate.cs" />
+    <Compile Include="Key.cs" />
+    <Compile Include="NUnitConstraints\ActualMatchesExpectedLocationConstraint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnitConstraints\ActualMatchesExpectedLocationConstraintExpectingContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnitConstraints\CheckableElementIsCheckedConstraint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnitConstraints\CheckableElementIsNotCheckedConstraint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnitConstraints\ElementIsNotVisibleConstraint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnitConstraints\ElementIsVisibleConstraint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnitConstraints\ElementTextContainsConstraint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnitConstraints\SelectedOptionIsConstraint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnitConstraints\TextFieldIsEnabledConstraint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnitConstraints\TextFieldIsNotEnabledConstraint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnitConstraints\TextFieldTextIsConstraint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnitConstraints\TextFieldValueContainsConstraint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnitConstraints\TextFieldValueDoesNotContainConstraint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnitConstraints\TextFieldValueIsConstraint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnitConstraints\TextFieldValueIsEmptyConstraint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnitConstraints\TextFieldValueIsNotConstraint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NUnitConstraints\TextFieldValueIsNotEmptyConstraint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ObjectExtensions.cs" />
+    <Compile Include="PageActionDelegate.cs" />
+    <Compile Include="PageIdentityVerificationType.cs" />
+    <Compile Include="PageObject.cs" />
+    <Compile Include="PageObjectElement.cs" />
+    <Compile Include="PageObjectElementSimple.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringMatch.cs" />
+    <Compile Include="NUnitConstraints\TextIsVisibleConstraintExpectingContext.cs" />
+    <Compile Include="NUnitConstraints\TextIsVisibleConstraintExpectingPageObject.cs" />
+    <Compile Include="NUnitConstraints\UITestConstraintBase.cs" />
+    <Compile Include="UriExpectation.cs" />
+    <Compile Include="UriExpectationHelper.cs" />
+    <Compile Include="UriMatch.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
