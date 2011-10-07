@@ -3,16 +3,6 @@ NSure
 
 Simple page object framework for .NET.
 
-Examples:
---------
-**Simple assertion:**
-
-```C#
-
-
-	Ensure.That(myObject != null, problemDescription:"myObject is null.");
-	
-```
 
 How to build and/or run the tests:
 --------
