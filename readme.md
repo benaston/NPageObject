@@ -1,4 +1,4 @@
-NSure
+NPageObject
 =====
 
 Simple page object framework for .NET.
