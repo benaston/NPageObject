@@ -1,25 +1,39 @@
-﻿namespace NPageObject
+﻿// Copyright 2011, Ben Aston (ben@bj.ma).
+// 
+// This file is part of NPageObject.
+// 
+// NPageObject is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// NPageObject is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public License
+// along with NPageObject.  If not, see <http://www.gnu.org/licenses/>.
+
+namespace NPageObject
 {
-    using System;
-    using System.Threading;
+	using System;
+	using System.Threading;
 
-    public static class ObjectExtensions
-    {
-        public static T AfterWaiting<T>(this T o, TimeSpan waitTime)
-        {
-            Thread.Sleep(waitTime);
+	public static class ObjectExtensions
+	{
+		public static T AfterWaiting<T>(this T o, TimeSpan waitTime) {
+			Thread.Sleep(waitTime);
 
-            return o;
-        }
+			return o;
+		}
 
-        public static T AfterPossiblyWaiting<T>(this T o, TimeSpan waitTime, Func<bool> shouldWait)
-        {
-            if (shouldWait())
-            {
-                Thread.Sleep(waitTime);
-            }
+		public static T AfterPossiblyWaiting<T>(this T o, TimeSpan waitTime, Func<bool> shouldWait) {
+			if (shouldWait()) {
+				Thread.Sleep(waitTime);
+			}
 
-            return o;
-        }
-    }
+			return o;
+		}
+	}
 }

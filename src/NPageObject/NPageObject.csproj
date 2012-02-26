@@ -79,9 +79,9 @@
     <Compile Include="CurrentPage.cs" />
     <Compile Include="DesiredSelectionSpeed.cs" />
     <Compile Include="ElementVisibility.cs" />
-    <Compile Include="Exceptions\GGHyperlinkNotFoundException.cs" />
-    <Compile Include="Exceptions\GGPageObjectElementNotFoundException.cs" />
-    <Compile Include="Exceptions\GGPageTextNotFoundException.cs" />
+    <Compile Include="Exceptions\HyperlinkNotFoundException.cs" />
+    <Compile Include="Exceptions\PageObjectElementNotFoundException.cs" />
+    <Compile Include="Exceptions\PageTextNotFoundException.cs" />
     <Compile Include="ICurrentPageAware.cs" />
     <Compile Include="IHaveMutableUrl.cs" />
     <Compile Include="IHaveUITestContext.cs" />
