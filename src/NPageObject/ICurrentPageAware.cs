@@ -28,7 +28,7 @@ namespace NPageObject
 	public interface ICurrentPageAware
 	{
 		/// <example>
-		/// 	http://www.local.justgiving.com/some/page.aspx
+		/// 	http://www.example.com/some/page
 		/// </example>
 		string UriActualAbsolute { get; }
 	}
