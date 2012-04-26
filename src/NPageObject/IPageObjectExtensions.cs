@@ -1,4 +1,4 @@
-﻿// Copyright 2011, Ben Aston (ben@bj.ma).
+﻿// Copyright 2012, Ben Aston (ben@bj.ma).
 // 
 // This file is part of NPageObject.
 // 
@@ -13,7 +13,7 @@
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with NPageObject.  If not, see <http://www.gnu.org/licenses/>.
+// along with NPageObject. If not, see <http://www.gnu.org/licenses/>.
 
 namespace NPageObject
 {
@@ -31,7 +31,6 @@ namespace NPageObject
 		/// <param name="pageObject"> The page object to return. </param>
 		/// <param name="timeSpan"> Duration to wait for. </param>
 		/// <param name="reason"> Please explain the reason for the wait as the underlying driver wrapper ensures robust selection for most cases. This string is unused programatically. </param>
-		/// <returns> </returns>
 		public static TPage AndWaitFor<TPage>(this TPage pageObject, TimeSpan timeSpan, string reason)
 			where TPage : IPageObject<TPage>, new() {
 			Ensure.That<ArgumentNullException>(timeSpan > TimeSpan.Zero, "timespan not supplied.");

@@ -1,4 +1,4 @@
-﻿// Copyright 2011, Ben Aston (ben@bj.ma).
+﻿// Copyright 2012, Ben Aston (ben@bj.ma).
 // 
 // This file is part of NPageObject.
 // 
@@ -13,7 +13,7 @@
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with NPageObject.  If not, see <http://www.gnu.org/licenses/>.
+// along with NPageObject. If not, see <http://www.gnu.org/licenses/>.
 
 namespace NPageObject
 {
