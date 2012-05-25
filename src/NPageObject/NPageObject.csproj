@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BrowserSessionScope.cs" />
+    <Compile Include="IHasMutableUrl.cs" />
     <Compile Include="CssSelector.cs" />
     <Compile Include="Current.cs" />
     <Compile Include="CurrentPage.cs" />
@@ -78,8 +79,7 @@
     <Compile Include="Exceptions\PageObjectElementNotFoundException.cs" />
     <Compile Include="Exceptions\PageTextNotFoundException.cs" />
     <Compile Include="ICurrentPageAware.cs" />
-    <Compile Include="IHaveMutableUrl.cs" />
-    <Compile Include="IHaveUITestContext.cs" />
+    <Compile Include="IHasUITestContext.cs" />
     <Compile Include="IPageObject.cs" />
     <Compile Include="IPageObjectElement.cs" />
     <Compile Include="IPageObjectElementExtensions.cs" />

@@ -26,7 +26,7 @@ namespace NPageObject
 			where TPage : IPageObject<TPage>, new();
 
 		TNewPage BrowseTo<TNewPage>(string uriContentsRelativeToRoot)
-			where TNewPage : IPageObject<TNewPage>, IHaveMutableUrl, new();
+			where TNewPage : IPageObject<TNewPage>, IHasMutableUrl, new();
 
 		TNewPage BrowseTo<TNewPage>()
 			where TNewPage : IPageObject<TNewPage>, new();

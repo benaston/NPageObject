@@ -17,7 +17,7 @@
 
 namespace NPageObject
 {
-	public interface IPageObjectElementSimple<TExpectedCurrentPage> : IHaveUITestContext
+	public interface IPageObjectElementSimple<TExpectedCurrentPage> : IHasUITestContext
 		where TExpectedCurrentPage : IPageObject<TExpectedCurrentPage>, new()
 	{
 		new IUITestContext<TExpectedCurrentPage> Context { get; }

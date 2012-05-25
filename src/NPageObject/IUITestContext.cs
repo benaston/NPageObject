@@ -33,7 +33,7 @@ namespace NPageObject
 		string UriActualRelative { get; }
 
 		TNewPage BrowseTo<TNewPage>(string uriContentsRelativeToRoot)
-			where TNewPage : IPageObject<TNewPage>, IHaveMutableUrl, new();
+			where TNewPage : IPageObject<TNewPage>, IHasMutableUrl, new();
 
 		TNew BrowseTo<TNew>() where TNew : IPageObject<TNew>, new();
 

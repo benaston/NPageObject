@@ -33,7 +33,7 @@ namespace NPageObject
 
 		public IUITestContext<TPage> Context { get; private set; }
 
-		IUITestContext IHaveUITestContext.Context {
+		IUITestContext IHasUITestContext.Context {
 			get { return Context; }
 		}
 
