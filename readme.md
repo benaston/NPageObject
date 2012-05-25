@@ -76,6 +76,7 @@ It *must* be ```.NET Framework 4``` (*not* the ```Client Profile``` version - or
 
 Note: you will need *both* of these packages to perform meaningful work with NPageObject. There is not currently an implementation for UI testing frameworks other than Selenium.
 
+
 **1. Define a page object **
 
 For example:
@@ -105,6 +106,7 @@ public class LoginPage : PageObject<LoginPage>
 
 ```
 
+
 **2. Initialize NPageObject in your test setup **
 
 For example:
@@ -133,6 +135,7 @@ public class ExampleTest
 }
 
 ```
+
 
 **3. Write your test, optionally using one of the provided custom NUnit constraints **
 
