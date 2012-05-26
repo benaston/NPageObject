@@ -57,7 +57,7 @@ public class ExampleTest
 
 ```
 
-If NPageObject helps you or your team develop great software please [let me know](mailto:ben@bj.ma "Ben's email address")! It will help motivate me to develop and improve NFeature.
+If NPageObject helps you or your team develop great software please [let me know](mailto:ben@bj.ma "Ben's email address")! It will help motivate me to develop and improve NPageObject.
 
 
 How to use:
