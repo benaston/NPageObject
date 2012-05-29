@@ -155,8 +155,7 @@ For example:
 							  .ClickWithNavigation<HomePage>()
 							  .CurrentPage;
 
-		NUnit.Framework.Assert.That(currentPage, 
-			new ActualMatchesExpectedLocationConstraint<HomePage>());
+		Assert.That(currentPage, new ActualMatchesExpectedLocationConstraint<HomePage>());
 	}
 	
 ```
