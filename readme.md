@@ -42,7 +42,7 @@ public class ExampleTest
 	{
 		var currentPage = _context.BrowseTo<LoginPage>()
 							  .UsernameTextField
-							  .InputText("sdkubdf")
+							  .InputText("username")
 							  .PwdTextField
 							  .InputText("password")
 							  .LoginButton
