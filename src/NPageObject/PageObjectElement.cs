@@ -102,7 +102,7 @@ namespace NPageObject
 
 		public IUITestContext<TParentPage> Context { get; private set; }
 
-		IUITestContext IHaveUITestContext.Context {
+		IUITestContext IHasUITestContext.Context {
 			get { return Context; }
 		}
 	}

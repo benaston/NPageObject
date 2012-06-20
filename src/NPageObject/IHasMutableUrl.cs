@@ -17,10 +17,8 @@
 
 namespace NPageObject
 {
-	public interface IHaveUITestContext
+	public interface IHasMutableUrl
 	{
-		IUITestContext Context { get; }
+		UriExpectation UriExpectation { set; }
 	}
 }
-
-// ReSharper restore InconsistentNaming
