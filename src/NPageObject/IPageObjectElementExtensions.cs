@@ -48,6 +48,15 @@ namespace NPageObject
 			return element.Context.InputText(element, text).ExpectedPage;
 		}
 
+		/// <summary>
+		/// Useful for when ajax changes the "page", for example Google "instant search".
+		/// </summary>
+		public static T InputTextWithNavigation<T, TDestinationPage>(this IPageObjectElement<T> element, string text)
+			where T : IPageObject<T>, new() {
+				element.Context.InputText(element, text);
+			return new TDestinationPage { Context = Context.SetExpectedCurrentPage<TDestinationPage>() };
+		}
+
 		public static IPageObjectElement<T> ClearValue<T>(this IPageObjectElement<T> element)
 			where T : IPageObject<T>, new() {
 			return element.Context.ClearValue(element);
