@@ -28,7 +28,7 @@ namespace NPageObject
 	{
 		public static bool TextContains<T>(this IPageObjectElement<T> element, string text)
 			where T : IPageObject<T>, new() {
-			Ensure.That<ArgumentException>(string.IsNullOrWhiteSpace(element.SelectorFullyQualified),
+			Ensure.That<ArgumentException>(!string.IsNullOrWhiteSpace(element.SelectorFullyQualified),
 			                               "element selector not supplied.");
 
 			return element.Context.TextContains(element, text);
@@ -51,10 +51,12 @@ namespace NPageObject
 		/// <summary>
 		/// Useful for when ajax changes the "page", for example Google "instant search".
 		/// </summary>
-		public static T InputTextWithNavigation<T, TDestinationPage>(this IPageObjectElement<T> element, string text)
-			where T : IPageObject<T>, new() {
+		public static TDestinationPage InputTextWithNavigation<T, TDestinationPage>(this IPageObjectElement<T> element, string text)
+			where T : IPageObject<T>, new()
+			where TDestinationPage : IPageObject<TDestinationPage>, new()
+		{
 				element.Context.InputText(element, text);
-			return new TDestinationPage { Context = Context.SetExpectedCurrentPage<TDestinationPage>() };
+			return new TDestinationPage { Context = element.Context.SetExpectedCurrentPage<TDestinationPage>() };
 		}
 
 		public static IPageObjectElement<T> ClearValue<T>(this IPageObjectElement<T> element)
@@ -65,6 +67,12 @@ namespace NPageObject
 		public static IPageObjectElement<T> PressEnter<T>(this IPageObjectElement<T> element)
 			where T : IPageObject<T>, new() {
 			return element.Context.PressEnter(element);
+		}
+
+		public static string GetAttributeValue<T>(this IPageObjectElement<T> element, string attributeName)
+			where T : IPageObject<T>, new()
+		{
+			return element.Context.GetAttributeValue(element, attributeName);
 		}
 
 		public static IUITestContext<TExpectedResultantPage> PressEnterWithPageNavigation
