@@ -15,12 +15,11 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with NPageObject. If not, see <http://www.gnu.org/licenses/>.
 
-namespace NPageObject
-{
-	using NUnit.Framework.Constraints;
-	using NUnitConstraints;
+using NUnit.Framework.Constraints;
 
-	public class TextIsVisibleConstraintExpectingPageObject<TPage> : UITestConstraintBase<TPage>
+namespace NPageObject.NUnitConstraints
+{
+    public class TextIsVisibleConstraintExpectingPageObject<TPage> : UITestConstraintBase<TPage>
 		where TPage : IPageObject<TPage>, new()
 	{
 		public TextIsVisibleConstraintExpectingPageObject(string text, StringMatch matchType) {
