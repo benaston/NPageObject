@@ -1,61 +1,47 @@
-﻿// Copyright 2012, Ben Aston (ben@bj.ma).
-// 
-// This file is part of NPageObject.
-// 
-// NPageObject is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// NPageObject is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
-// 
-// You should have received a copy of the GNU Lesser General Public License
-// along with NPageObject. If not, see <http://www.gnu.org/licenses/>.
-
 namespace NPageObject
 {
-	public interface IBrowserActionPerformer
-	{
-		IPageObjectElement<TPage> PressKey<TPage>(IPageObjectElement<TPage> element, Key key)
-			where TPage : IPageObject<TPage>, new();
+    public interface IBrowserActionPerformer
+    {
+        TNewPage NavigateTo<TDriver, TNewPage>(string uriContentsRelativeToRoot)
+            where TNewPage : PageObject<TDriver, TNewPage>, IHasMutableUrl, new();
 
-		IPageObjectElement<TPage> PressEnter<TPage>(IPageObjectElement<TPage> element)
-			where TPage : IPageObject<TPage>, new();
+        TNewPage NavigateTo<TDriver, TNewPage>()
+            where TNewPage : PageObject<TDriver, TNewPage>, new();
 
-		TNewPage BrowseTo<TNewPage>(string uriContentsRelativeToRoot)
-			where TNewPage : IPageObject<TNewPage>, IHasMutableUrl, new();
+        IElementOn<TDriver, TPage> Click<TDriver, TPage>(IElementOn<TDriver, TPage> element)
+            where TPage : PageObject<TDriver, TPage>, new();
 
-		TNewPage BrowseTo<TNewPage>()
-			where TNewPage : IPageObject<TNewPage>, new();
+        IElementOn<TDriver, TPage> InputText<TDriver, TPage>(IElementOn<TDriver, TPage> element,
+                                                   string text)
+            where TPage : PageObject<TDriver, TPage>, new();
 
-		IPageObjectElement<TPage> Click<TPage>(IPageObjectElement<TPage> element)
-			where TPage : IPageObject<TPage>, new();
+        IElementOn<TDriver, TPage> PressKey<TDriver, TPage>(IElementOn<TDriver, TPage> element, Key key)
+            where TPage : PageObject<TDriver, TPage>, new();
 
-		IPageObjectElement<TPage> Hover<TPage>(IPageObjectElement<TPage> element)
-			where TPage : IPageObject<TPage>, new();
+        IElementOn<TDriver, TPage> PressEnter<TDriver, TPage>(IElementOn<TDriver, TPage> element)
+            where TPage : PageObject<TDriver, TPage>, new();
 
-		IPageObjectElement<TPage> InputText<TPage>(IPageObjectElement<TPage> element,
-		                                           string text)
-			where TPage : IPageObject<TPage>, new();
+        TNewPage BrowseTo<TDriver, TNewPage>()
+            where TNewPage : PageObject<TDriver, TNewPage>, new();
 
-		IPageObjectElement<TPage> ClearValue<TPage>(IPageObjectElement<TPage> element)
-			where TPage : IPageObject<TPage>, new();
+        IElementOn<TDriver, TPage> Hover<TDriver, TPage>(IElementOn<TDriver, TPage> element)
+            where TPage : PageObject<TDriver, TPage>, new();
 
-		void MaximizeBrowserWindow();
+        IElementOn<TDriver, TPage> ClearValue<TDriver, TPage>(IElementOn<TDriver, TPage> element)
+            where TPage : PageObject<TDriver, TPage>, new();
 
-		IUITestContext<TExpectedResultantPage> PressEnterWithPageNavigation
-			<TExpectedSourcePage, TExpectedResultantPage>(
-			IPageObjectElement<TExpectedSourcePage> element)
-			where TExpectedSourcePage : IPageObject<TExpectedSourcePage>, new()
-			where TExpectedResultantPage : IPageObject<TExpectedResultantPage>, new();
+        void MaximizeBrowserWindow();
 
-		TPage SelectFromDropDown<TPage>(IPageObjectElement<TPage> element, string value)
-			where TPage : IPageObject<TPage>, new();
+        ITestContext<TExpectedResultantPage> PressEnterWithPageNavigation
+            <TDriver, TExpectedSourcePage, TExpectedResultantPage>(
+            IElementOn<TDriver, TExpectedSourcePage> element)
+            where TExpectedSourcePage : PageObject<TDriver, TExpectedSourcePage>, new()
+            where TExpectedResultantPage : PageObject<TDriver, TExpectedResultantPage>, new();
 
-		TPage SelectFromDropDown<TPage>(IPageObjectElement<TPage> element, int index)
-			where TPage : IPageObject<TPage>, new();
-	}
+        TPage SelectFromDropDown<TDriver, TPage>(IElementOn<TDriver, TPage> element, string value)
+            where TPage : PageObject<TDriver, TPage>, new();
+
+        TPage SelectFromDropDown<TDriver, TPage>(IElementOn<TDriver, TPage> element, int index)
+            where TPage : PageObject<TDriver, TPage>, new();
+    }
 }

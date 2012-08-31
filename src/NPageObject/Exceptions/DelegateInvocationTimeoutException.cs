@@ -1,6 +1,6 @@
 using System;
 
-namespace NPageObject.x.NPageObject
+namespace NPageObject.Exceptions
 {
     public class DelegateInvocationTimeoutException : Exception {}
 }

@@ -1,17 +1,17 @@
 using System.Collections.Generic;
 
-namespace NPageObject.x.NPageObject
+namespace NPageObject
 {
     /// <summary>
     /// Optional parent element meant to enable use of a hierarchy of PageObjectElementSelectables for DRY construction of selectors.
     /// </summary>
-    public class ElementOn<TParentPage> : IElementOn<TParentPage>
-        where TParentPage : PageObject<TParentPage>, new()
+    public class ElementOn<TDriver, TParentPage> : IElementOn<TDriver, TParentPage>
+        where TParentPage : PageObject<TDriver, TParentPage>, new()
     {
-        public ElementOn(ITestContext<TParentPage> context,
+        public ElementOn(ITestContext<TDriver, TParentPage> context,
                                  string selector = "*",
                                  string text = "",
-                                 IPageObjectElementSimple<TParentPage> parentElement = null)
+                                 IPageObjectElementSimple<TDriver, TParentPage> parentElement = null)
         {
             DirectSelector = selector;
             Text = text;
@@ -22,10 +22,10 @@ namespace NPageObject.x.NPageObject
         /// <summary>
         /// Use the selectors array if your element has multiple possible selectors, for example if different renderings for MVT purposes are used.
         /// </summary>
-        public ElementOn(ITestContext<TParentPage> context,
+        public ElementOn(ITestContext<TDriver, TParentPage> context,
                                  string[] selectors,
                                  string text = "",
-                                 IPageObjectElementSimple<TParentPage> parentElement = null)
+                                 IPageObjectElementSimple<TDriver, TParentPage> parentElement = null)
         {
             DirectSelectors = selectors;
             Text = text;
@@ -33,7 +33,7 @@ namespace NPageObject.x.NPageObject
             ParentElement = parentElement;
         }
 
-        public IPageObjectElementSimple<TParentPage> ParentElement { get; set; }
+        public IPageObjectElementSimple<TDriver, TParentPage> ParentElement { get; set; }
 
         public string[] DirectSelectors { get; set; }
 
@@ -75,6 +75,6 @@ namespace NPageObject.x.NPageObject
             get { return Context.ExpectedPage; }
         }
 
-        public ITestContext<TParentPage> Context { get; private set; }
+        public ITestContext<TDriver, TParentPage> Context { get; private set; }
     }
 }

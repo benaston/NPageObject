@@ -1,4 +1,4 @@
-namespace NPageObject.x.NPageObject
+namespace NPageObject
 {
     public enum ShouldRepeatDelegateInvocation
     {

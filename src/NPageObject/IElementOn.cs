@@ -1,10 +1,10 @@
-namespace NPageObject.x.NPageObject
+namespace NPageObject
 {
     /// <summary>
     /// Responsible for defining the iface for page object elements that can be directly selected (and hence have actions performed upon like clicking, hovering etc).
     /// </summary>
-    public interface IElementOn<TParentPage> : IPageObjectElementSimple<TParentPage>
-        where TParentPage : PageObject<TParentPage>, new()
+    public interface IElementOn<TDriver, out TParentPage> : IPageObjectElementSimple<TDriver, TParentPage>
+        where TParentPage : PageObject<TDriver, TParentPage>, new()
     {
         string Text { get; }
 

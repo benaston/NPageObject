@@ -1,6 +1,6 @@
 using System;
 
-namespace NPageObject.x.NPageObject
+namespace NPageObject.Extensions
 {
     public static class IntegerExtensions
     {

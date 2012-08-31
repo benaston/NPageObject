@@ -1,8 +1,9 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
+using NPageObject.Exceptions;
 
-namespace NPageObject.x.NPageObject
+namespace NPageObject
 {
     public class DelegateHelper
     {
@@ -25,7 +26,7 @@ namespace NPageObject.x.NPageObject
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            for (; ; )
+            for (;;)
             {
                 TOutputValue delegateOutputValue;
                 var continueDelegateInvocation = @delegate(dto, out delegateOutputValue);

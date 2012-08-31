@@ -28,7 +28,7 @@ namespace NPageObject
 			return o;
 		}
 
-		public static T AfterPossiblyWaiting<T>(this T o, TimeSpan waitTime, Func<bool> shouldWait) {
+		public static T AfterWaitingUpTo<T>(this T o, TimeSpan waitTime, Func<bool> shouldWait) {
 			if (shouldWait()) {
 				Thread.Sleep(waitTime);
 			}
