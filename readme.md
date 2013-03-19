@@ -21,7 +21,7 @@ public class LoginPage : PageObject<LoginPage>
 		get { return new ElementOn<LoginPage>(Context, selector: "#username"); }
 	}
 
-	public IElementOn<LoginPage> PwdTextField {
+	public IElementOn<LoginPage> PasswordTextField {
 		get { return new ElementOn<LoginPage>(Context, selector: "#password"); }
 	}
 
@@ -45,7 +45,7 @@ public class ExampleTest
 		var page = _context.NavigateTo<LoginPage>()
 							  .UsernameTextField
 							  .InputText("username")
-							  .PwdTextField
+							  .PasswordTextField
 							  .InputText("password")
 							  .LoginButton
 							  .ClickWithNavigation<HomePage>();
@@ -91,7 +91,7 @@ public class LoginPage : PageObject<LoginPage>
 		get { return new ElementOn<LoginPage>(Context, selector: "#username"); }
 	}
 
-	public IElementOn<LoginPage> PwdTextField {
+	public IElementOn<LoginPage> PasswordTextField {
 		get { return new ElementOn<LoginPage>(Context, selector: "#password"); }
 	}
 
@@ -145,7 +145,7 @@ For example:
 		var page = _context.BrowseTo<LoginPage>()
 							  .UsernameTextField
 							  .InputText("sdkubdf")
-							  .PwdTextField
+							  .PasswordTextField
 							  .InputText("password")
 							  .LoginButton
 							  .ClickWithNavigation<HomePage>();
