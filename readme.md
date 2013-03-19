@@ -3,8 +3,6 @@ NPageObject
 
 ![Alt text](./how-it-works.png "How NPageObject works")
 
-*Please note: the instructions below are now out of date (but should still be of some use).*
-
 A page object framework for .NET. Page objects promote locality of reference, DRY-up your acceptance tests and reduce brittleness. It makes your code more maintainable.
 
 Example of use:
@@ -19,15 +17,15 @@ public class LoginPage : PageObject<LoginPage>
 
 	public override string IdentifyingText { get { return "Example identifying text" } }
 
-	public IPageObjectElement<LoginPage> UsernameTextField 	{
+	public IElementOn<LoginPage> UsernameTextField 	{
 		get { return new PageObjectElement<LoginPage>(Context, selector: "#username"); }
 	}
 
-	public IPageObjectElement<LoginPage> PwdTextField {
+	public IElementOn<LoginPage> PwdTextField {
 		get { return new PageObjectElement<LoginPage>(Context, selector: "#password"); }
 	}
 
-	public IPageObjectElement<LoginPage> LoginButton {
+	public IElementOn<LoginPage> LoginButton {
 		get { return new PageObjectElement<LoginPage>(Context, selector: "#loginButton"); }
 	}
 }
@@ -44,7 +42,7 @@ public class ExampleTest
 	[TestMethod]
 	public void GivenAValidUser_WhenIEnterCredentialsAndClickLogin_ThenIAmLoggedIn()
 	{
-		var currentPage = _context.BrowseTo<LoginPage>()
+		var page = _context.NavigateTo<LoginPage>()
 							  .UsernameTextField
 							  .InputText("username")
 							  .PwdTextField
@@ -53,8 +51,7 @@ public class ExampleTest
 							  .ClickWithNavigation<HomePage>()
 							  .CurrentPage;
 
-		NUnit.Framework.Assert.That(currentPage, 
-			new ActualMatchesExpectedLocationConstraint<HomePage>());
+		Assert.That(page.MatchesActualBrowserLocation());
 	}
 }
 
@@ -74,12 +71,8 @@ It *must* be ```.NET Framework 4``` (*not* the ```Client Profile``` version - or
 **0. Get it**
 
 ```shell
-	nuget install npageobject
-	nuget install npageobject.selenium
+	nuget install npageobject	
 ```
-
-Note: you will need *both* of these packages to perform meaningful work with NPageObject. There is not currently an implementation for UI testing frameworks other than Selenium.
-
 
 **1. Define a page object**
 
@@ -95,16 +88,16 @@ public class LoginPage : PageObject<LoginPage>
 
 	public override string IdentifyingText { get { return "Example identifying text" } }
 
-	public IPageObjectElement<LoginPage> UsernameTextField 	{
-		get { return new PageObjectElement<LoginPage>(Context, selector: "#username"); }
+	public IElementOn<LoginPage> UsernameTextField 	{
+		get { return new ElementOn<LoginPage>(Context, selector: "#username"); }
 	}
 
-	public IPageObjectElement<LoginPage> PwdTextField {
-		get { return new PageObjectElement<LoginPage>(Context, selector: "#password"); }
+	public IElementOn<LoginPage> PwdTextField {
+		get { return new ElementOn<LoginPage>(Context, selector: "#password"); }
 	}
 
-	public IPageObjectElement<LoginPage> LoginButton {
-		get { return new PageObjectElement<LoginPage>(Context, selector: "#loginButton"); }
+	public IElementOn<LoginPage> LoginButton {
+		get { return new ElementOn<LoginPage>(Context, selector: "#loginButton"); }
 	}
 }
 
@@ -150,7 +143,7 @@ For example:
 	[Test]
 	public void GivenAValidUser_WhenIEnterCredentialsAndClickLogin_ThenIAmLoggedIn()
 	{
-		var currentPage = _context.BrowseTo<LoginPage>()
+		var page = _context.BrowseTo<LoginPage>()
 							  .UsernameTextField
 							  .InputText("sdkubdf")
 							  .PwdTextField
@@ -159,7 +152,7 @@ For example:
 							  .ClickWithNavigation<HomePage>()
 							  .CurrentPage;
 
-		Assert.That(currentPage, new ActualMatchesExpectedLocationConstraint<HomePage>());
+		Assert.That(page.MatchesActualBrowserLocation());
 	}
 	
 ```
