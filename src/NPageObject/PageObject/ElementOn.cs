@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace NPageObject.PageObject
 {
     /// <summary>
-    /// Optional parent element meant to enable use of a hierarchy of PageObjectElementSelectables for DRY construction of selectors.
+    /// Optional parent element meant to enable use of a hierarchy of "ElementOn"s for DRY construction of selectors.
     /// </summary>
     public class ElementOn<TParentPage> : IElementOn<TParentPage>
         where TParentPage : PageObject<TParentPage>, new()
