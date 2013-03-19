@@ -9,8 +9,8 @@ namespace YourNamespace
 {
     /// <summary>
     /// NOTE: this has to be in the same DLL as your Specflow 
-	/// tests, hence it is out of the src directory here for you 
-	/// to copy elsewhere.
+    /// tests, hence it is out of the src directory here for you 
+    /// to copy elsewhere.
     /// </summary>
     [Binding]
     public class SpecflowLifecycle
