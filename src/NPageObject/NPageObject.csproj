@@ -47,47 +47,51 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NHelpfulException">
-      <HintPath>..\packages\NHelpfulException.1.0.4554.34109\lib\net40\NHelpfulException.dll</HintPath>
-    </Reference>
-    <Reference Include="NSure">
-      <HintPath>..\packages\NSure.1.0.4554.34428\lib\net40\NSure.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="WebDriver">
+      <HintPath>..\packages\Selenium.WebDriver.2.31.2\lib\net40\WebDriver.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BrowserSessionScope.cs" />
+    <Compile Include="Enumerations\ElementVisibility.cs" />
+    <Compile Include="Enumerations\Key.cs" />
+    <Compile Include="Enumerations\ShouldRepeatDelegateInvocation.cs" />
+    <Compile Include="Enumerations\UriMatch.cs" />
     <Compile Include="Exceptions\DelegateInvocationTimeoutException.cs" />
     <Compile Include="Exceptions\HyperlinkNotFoundException.cs" />
     <Compile Include="Exceptions\PageObjectElementNotFoundException.cs" />
     <Compile Include="Exceptions\PageTextNotFoundException.cs" />
+    <Compile Include="Extensions\ColorStringExtensions.cs" />
     <Compile Include="Extensions\IElementOnExtensions.cs" />
     <Compile Include="Extensions\IntegerExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\PageObjectExtensions.cs" />
     <Compile Include="Extensions\RepeatedlyInvocableDelegateExtensions.cs" />
-    <Compile Include="ObjectExtensions.cs" />
-    <Compile Include="PageIdentityVerificationType.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StringMatch.cs" />
-    <Compile Include="DelegateHelper.cs" />
-    <Compile Include="DesiredSelectionSpeed.cs" />
-    <Compile Include="ElementOn.cs" />
-    <Compile Include="ElementVisibility.cs" />
     <Compile Include="IBrowserActionPerformer.cs" />
     <Compile Include="IDomChecker.cs" />
-    <Compile Include="IElementOn.cs" />
     <Compile Include="IHasMutableUrl.cs" />
-    <Compile Include="IPageObjectElementSimple.cs" />
+    <Compile Include="ITestContext.cs" />
     <Compile Include="ITestContext`1.cs" />
-    <Compile Include="ITestContext`2.cs" />
-    <Compile Include="Key.cs" />
-    <Compile Include="PageObject.cs" />
-    <Compile Include="RepeatedlyInvocableDelegate.cs" />
-    <Compile Include="ShouldRepeatDelegateInvocation.cs" />
+    <Compile Include="PageObject\DefaultPage.cs" />
+    <Compile Include="PageObject\ElementOn.cs" />
+    <Compile Include="PageObject\IElementOn.cs" />
+    <Compile Include="PageObject\IElementOnSimple.cs" />
+    <Compile Include="PageObject\PageObject.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reliability\DelegateHelper.cs" />
+    <Compile Include="Reliability\RepeatedlyInvocableDelegate.cs" />
+    <Compile Include="Scenario.cs" />
+    <Compile Include="Selenium\SelectClosestMatchingDelegateDto.cs" />
+    <Compile Include="Selenium\SeleniumBrowserActionPerformer.cs" />
+    <Compile Include="Selenium\SeleniumDomChecker.cs" />
+    <Compile Include="Selenium\SeleniumDomCheckerHelper.cs" />
+    <Compile Include="Selenium\SeleniumTestContext.cs" />
+    <Compile Include="Selenium\SeleniumUITestContextHelpers.cs" />
     <Compile Include="UriExpectation.cs" />
     <Compile Include="UriExpectationHelper.cs" />
-    <Compile Include="UriMatch.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

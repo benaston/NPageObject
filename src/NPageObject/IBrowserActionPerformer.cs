@@ -1,47 +1,47 @@
+using NPageObject.Enumerations;
+using NPageObject.PageObject;
+
 namespace NPageObject
 {
     public interface IBrowserActionPerformer
     {
-        TNewPage NavigateTo<TDriver, TNewPage>(string uriContentsRelativeToRoot)
-            where TNewPage : PageObject<TDriver, TNewPage>, IHasMutableUrl, new();
+        TNewPage NavigateTo<TNewPage>(string uriContentsRelativeToRoot)
+            where TNewPage : PageObject<TNewPage>, IHasMutableUrl, new();
 
-        TNewPage NavigateTo<TDriver, TNewPage>()
-            where TNewPage : PageObject<TDriver, TNewPage>, new();
+        TNewPage NavigateTo<TNewPage>()
+            where TNewPage : PageObject<TNewPage>, new();
 
-        IElementOn<TDriver, TPage> Click<TDriver, TPage>(IElementOn<TDriver, TPage> element)
-            where TPage : PageObject<TDriver, TPage>, new();
+        IElementOn<TPage> Click<TPage>(IElementOn<TPage> element)
+            where TPage : PageObject<TPage>, new();
 
-        IElementOn<TDriver, TPage> InputText<TDriver, TPage>(IElementOn<TDriver, TPage> element,
-                                                   string text)
-            where TPage : PageObject<TDriver, TPage>, new();
+        IElementOn<TPage> InputText<TPage>(IElementOn<TPage> element,
+                                                           string text)
+            where TPage : PageObject<TPage>, new();
 
-        IElementOn<TDriver, TPage> PressKey<TDriver, TPage>(IElementOn<TDriver, TPage> element, Key key)
-            where TPage : PageObject<TDriver, TPage>, new();
+        IElementOn<TPage> Clear<TPage>(IElementOn<TPage> element)
+            where TPage : PageObject<TPage>, new();
 
-        IElementOn<TDriver, TPage> PressEnter<TDriver, TPage>(IElementOn<TDriver, TPage> element)
-            where TPage : PageObject<TDriver, TPage>, new();
+        IElementOn<TPage> PressKey<TPage>(IElementOn<TPage> element, Key key)
+            where TPage : PageObject<TPage>, new();
 
-        TNewPage BrowseTo<TDriver, TNewPage>()
-            where TNewPage : PageObject<TDriver, TNewPage>, new();
+        IElementOn<TPage> PressEnter<TPage>(IElementOn<TPage> element)
+            where TPage : PageObject<TPage>, new();
 
-        IElementOn<TDriver, TPage> Hover<TDriver, TPage>(IElementOn<TDriver, TPage> element)
-            where TPage : PageObject<TDriver, TPage>, new();
+        IElementOn<TPage> Hover<TPage>(IElementOn<TPage> element)
+            where TPage : PageObject<TPage>, new();
 
-        IElementOn<TDriver, TPage> ClearValue<TDriver, TPage>(IElementOn<TDriver, TPage> element)
-            where TPage : PageObject<TDriver, TPage>, new();
-
+        /// <summary>
+        /// NOTE: This is a total hack because the .NET 
+        /// selenium driver does not expose a method to 
+        /// resize the browser window. It also does not 
+        /// appear to work with the Chrome driver.
+        /// </summary>
         void MaximizeBrowserWindow();
 
-        ITestContext<TExpectedResultantPage> PressEnterWithPageNavigation
-            <TDriver, TExpectedSourcePage, TExpectedResultantPage>(
-            IElementOn<TDriver, TExpectedSourcePage> element)
-            where TExpectedSourcePage : PageObject<TDriver, TExpectedSourcePage>, new()
-            where TExpectedResultantPage : PageObject<TDriver, TExpectedResultantPage>, new();
+        TPage SelectFromDropDown<TPage>(IElementOn<TPage> element, string value)
+            where TPage : PageObject<TPage>, new();
 
-        TPage SelectFromDropDown<TDriver, TPage>(IElementOn<TDriver, TPage> element, string value)
-            where TPage : PageObject<TDriver, TPage>, new();
-
-        TPage SelectFromDropDown<TDriver, TPage>(IElementOn<TDriver, TPage> element, int index)
-            where TPage : PageObject<TDriver, TPage>, new();
+        IElementOn<TPage> SelectFromDropDown<TPage>(IElementOn<TPage> element, int index)
+            where TPage : PageObject<TPage>, new();
     }
 }

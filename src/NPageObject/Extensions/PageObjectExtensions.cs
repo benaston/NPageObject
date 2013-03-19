@@ -1,12 +1,13 @@
 using System;
 using System.Threading;
+using NPageObject.PageObject;
 
 namespace NPageObject.Extensions
 {
     public static class PageObjectExtensions
     {
-        public static bool MatchesActualBrowserLocation<TDriver, TPage>(this TPage page)
-            where TPage : PageObject<TDriver, TPage>, new()
+        public static bool MatchesActualBrowserLocation<TPage>(this TPage page)
+            where TPage : PageObject<TPage>, new()
         {
             if (page == null)
             {
@@ -14,13 +15,13 @@ namespace NPageObject.Extensions
             }
 
             return UriExpectationHelper.DoesActualMatchExpectedUri(page, page.Context) &&
-                   page.Context.DomChecker.IsTextVisibleStrict <TDriver, TPage>(page.IdentifyingText);
+                   page.Context.DomChecker.IsTextVisibleStrict <TPage>(page.IdentifyingText);
         }
 
-        public static TPage AndWaitFor<TDriver, TPage>(this TPage page,
+        public static TPage AndWaitFor<TPage>(this TPage page,
                                                     TimeSpan timeSpan,
                                                     string reason)
-            where TPage : PageObject<TDriver, TPage>, new()
+            where TPage : PageObject<TPage>, new()
         {
             if (timeSpan <= TimeSpan.Zero) { throw new ArgumentException("timespan"); }
 
@@ -29,10 +30,10 @@ namespace NPageObject.Extensions
             return page;
         }
 
-        public static bool TextIsVisible<TDriver, TPage>(this TPage page, string text)
-            where TPage : PageObject<TDriver, TPage>, new()
+        public static bool TextIsVisible<TPage>(this TPage page, string text)
+            where TPage : PageObject<TPage>, new()
         {
-            return page.Context.DomChecker.IsTextVisible<TDriver, TPage>(text);
+            return page.Context.DomChecker.IsTextVisible<TPage>(text);
         }
     }
 }

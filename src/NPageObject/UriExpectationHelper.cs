@@ -1,5 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
+using NPageObject.Enumerations;
+using NPageObject.PageObject;
 
 namespace NPageObject
 {
@@ -8,8 +10,8 @@ namespace NPageObject
         /// <summary>
         /// Returns true if actual URI from the context matches the expected URI from the PageObject.
         /// </summary>
-        public static bool DoesActualMatchExpectedUri<TDriver, TPage>(TPage page, ITestContext<TDriver, TPage> uiTestContext)
-            where TPage : PageObject<TDriver, TPage>, new()
+        public static bool DoesActualMatchExpectedUri<T>(T page, ITestContext<T> uiTestContext)
+            where T : PageObject<T>, new()
         {
             switch (page.UriExpectation.UriMatch)
             {

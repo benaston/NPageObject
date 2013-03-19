@@ -1,12 +1,26 @@
+using NPageObject.PageObject;
+using NPageObject.Selenium;
+
 namespace NPageObject
 {
-    /// <summary>
-    /// TDriver for selenium is IWebDriver.
-    /// </summary>
-    public interface ITestContext<out TDriver>
+    public interface ITestContext<out TExpectedPage> : ITestContext where TExpectedPage : PageObject<TExpectedPage>, new()
     {
-        TDriver Driver { get; }
+        TExpectedPage ExpectedPage { get; }
 
-        void ExecuteScript(string scriptToExecute);
+        string UriActualAbsolute { get; }
+        
+        string UriRoot { get; }
+
+        IBrowserActionPerformer BrowserActionPerformer { get; }
+        
+        IDomChecker DomChecker { get; }
+
+        TPageObject NavigateTo<TPageObject>() where TPageObject : PageObject<TPageObject>, new();
+
+        TDestinationPage ExpectedPageIs<TDestinationPage>()
+            where TDestinationPage : PageObject<TDestinationPage>, new();
+
+        SeleniumTestContext<TDestinationPage> SetExpectedPage<TDestinationPage>()
+            where TDestinationPage : PageObject<TDestinationPage>, new();
     }
 }

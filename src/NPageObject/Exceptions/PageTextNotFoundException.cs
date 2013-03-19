@@ -1,9 +1,10 @@
 using System;
+using NPageObject.PageObject;
 
 namespace NPageObject.Exceptions
 {
-    public class PageTextNotFoundException<TDriver, TPage> : Exception
-        where TPage : PageObject<TDriver, TPage>, new()
+    public class PageTextNotFoundException<TPage> : Exception
+        where TPage : PageObject<TPage>, new()
     {
         private const string ExceptionMessage = "Unable to find text on page.";
 

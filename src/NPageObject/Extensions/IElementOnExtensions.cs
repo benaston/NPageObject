@@ -4,30 +4,43 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using NSure;
-using ArgumentNullException = NHelpfulException.FrameworkExceptions.ArgumentNullException;
+using NPageObject.PageObject;
 
 namespace NPageObject.Extensions
 {
+    /// <summary>
+    /// These extension methods help make tests read more like English.
+    /// </summary>
     public static class IElementOnExtensions
     {
         private const char CssClassDelimiter = ' ';
 
-        public static string Text<TDriver, TPage>(this IElementOn<TDriver, TPage> element)
-            where TPage : PageObject<TDriver, TPage>, new()
+        public static bool TextContains<T>(this IElementOn<T> element, string text)
+            where T : PageObject<T>, new()
         {
-            if(string.IsNullOrWhiteSpace(element.SelectorFullyQualified))
+            if (string.IsNullOrWhiteSpace(element.SelectorFullyQualified))
+            {
+                throw new ArgumentException("element selector not supplied");
+            }
+
+            return element.Context.DomChecker.TextContains(element, text);
+        }
+
+        public static string Text<TPage>(this IElementOn<TPage> element)
+            where TPage : PageObject<TPage>, new()
+        {
+            if (string.IsNullOrWhiteSpace(element.SelectorFullyQualified))
             {
                 throw new ArgumentException("element selector not supplied");
             }
 
             return element.Context.DomChecker.GetText(element);
         }
-        
-        public static string Value<TDriver, TPage>(this IElementOn<TDriver, TPage> element)
-            where TPage : PageObject<TDriver, TPage>, new()
+
+        public static string Value<TPage>(this IElementOn<TPage> element)
+            where TPage : PageObject<TPage>, new()
         {
-            if(string.IsNullOrWhiteSpace(element.SelectorFullyQualified))
+            if (string.IsNullOrWhiteSpace(element.SelectorFullyQualified))
             {
                 throw new ArgumentException("element selector not supplied");
             }
@@ -35,26 +48,36 @@ namespace NPageObject.Extensions
             return element.Context.DomChecker.GetAttributeValue(element, "value");
         }
 
-        public static TPage Click<TDriver, TPage>(this IElementOn<TDriver, TPage> element) where TPage : PageObject<TDriver, TPage>, new()
+        public static TPage Click<TPage>(this IElementOn<TPage> element) where TPage : PageObject<TPage>, new()
         {
             element.Context.BrowserActionPerformer.Click(element);
 
             return new TPage { Context = element.Context };
         }
-        
-        public static bool HasClass<TDriver, TPage>(this IElementOn<TDriver, TPage> element, string @class) where TPage : PageObject<TDriver, TPage>, new()
+
+        public static bool HasClass<TPage>(this IElementOn<TPage> element, string @class) where TPage : PageObject<TPage>, new()
         {
             return element.Context.DomChecker.GetAttributeValue(element, "class").Split(CssClassDelimiter).Any(i => i == @class);
         }
-        
-        public static bool HasAttribute<TDriver, TPage>(this IElementOn<TDriver, TPage> element, string attribute) where TPage : PageObject<TDriver, TPage>, new()
+
+        public static bool DoesNotHaveClass<TPage>(this IElementOn<TPage> element, string @class) where TPage : PageObject<TPage>, new()
+        {
+            return element.Context.DomChecker.GetAttributeValue(element, "class").Split(CssClassDelimiter).All(i => i != @class);
+        }
+
+        public static bool ColorIs<TPage>(this IElementOn<TPage> element, string style) where TPage : PageObject<TPage>, new()
+        {
+            return element.Context.DomChecker.GetStyleValue(element, "color").RgbaToHexColor() == style;
+        }
+
+        public static bool HasAttribute<TPage>(this IElementOn<TPage> element, string attribute) where TPage : PageObject<TPage>, new()
         {
             return element.Context.DomChecker.GetAttributeValue(element, attribute) != null;
         }
 
-        public static TDestinationPage ClickWithNavigation<TDriver, TSourcePage, TDestinationPage>(this IElementOn<TDriver, TSourcePage> element)
-            where TSourcePage : PageObject<TDriver, TSourcePage>, new()
-            where TDestinationPage : PageObject<TDriver, TDestinationPage>, new()
+        public static TDestinationPage ClickWithNavigation<TSourcePage, TDestinationPage>(this IElementOn<TSourcePage> element)
+            where TSourcePage : PageObject<TSourcePage>, new()
+            where TDestinationPage : PageObject<TDestinationPage>, new()
         {
             element.Context.BrowserActionPerformer.Click(element);
 
@@ -63,9 +86,21 @@ namespace NPageObject.Extensions
                 Context = element.Context.SetExpectedPage<TDestinationPage>()
             };
         }
-        
-        public static TPage InputText<TDriver, TPage>(this IElementOn<TDriver, TPage> element, string text)
-            where TPage : PageObject<TDriver, TPage>, new()
+
+        public static TDestinationPage PressEnterWithNavigation<TSourcePage, TDestinationPage>(this IElementOn<TSourcePage> element)
+            where TSourcePage : PageObject<TSourcePage>, new()
+            where TDestinationPage : PageObject<TDestinationPage>, new()
+        {
+            element.Context.BrowserActionPerformer.PressEnter(element);
+
+            return new TDestinationPage
+            {
+                Context = element.Context.SetExpectedPage<TDestinationPage>()
+            };
+        }
+
+        public static TPage InputText<TPage>(this IElementOn<TPage> element, string text)
+            where TPage : PageObject<TPage>, new()
         {
             element.Context.BrowserActionPerformer.InputText(element, text);
 
@@ -75,74 +110,81 @@ namespace NPageObject.Extensions
         /// <summary>
         /// Useful for when ajax changes the "page", for example Google "instant search".
         /// </summary>
-        public static TDestinationPage InputTextWithNavigation<TDriver, TPage, TDestinationPage>(this ElementOn<TDriver, TPage> element, string text)
-            where TPage : PageObject<TDriver, TPage>, new()
-            where TDestinationPage : PageObject<TDriver, TDestinationPage>, new()
+        public static TDestinationPage InputTextWithNavigation<TPage, TDestinationPage>(this IElementOn<TPage> element, string text)
+            where TPage : PageObject<TPage>, new()
+            where TDestinationPage : PageObject<TDestinationPage>, new()
         {
             element.Context.BrowserActionPerformer.InputText(element, text);
             return new TDestinationPage { Context = element.Context.ExpectedPageIs<TDestinationPage>().Context };
         }
 
-        public static IElementOn<TDriver, TPage> ClearValue<TDriver, TPage>(this ElementOn<TDriver, TPage> element)
-            where TPage : PageObject<TDriver, TPage>, new()
+        public static IElementOn<TPage> Clear<TPage>(this IElementOn<TPage> element)
+            where TPage : PageObject<TPage>, new()
         {
-            return element.Context.BrowserActionPerformer.ClearValue(element);
+            return element.Context.BrowserActionPerformer.Clear(element);
         }
 
-        public static IElementOn<TDriver, TPage> PressEnter<TDriver, TPage>(this ElementOn<TDriver, TPage> element)
-            where TPage : PageObject<TDriver, TPage>, new()
+        public static IElementOn<TPage> PressEnter<TPage>(this IElementOn<TPage> element)
+            where TPage : PageObject<TPage>, new()
         {
             return element.Context.BrowserActionPerformer.PressEnter(element);
         }
 
-        public static string GetAttributeValue<TDriver, TPage>(this ElementOn<TDriver, TPage> element, string attributeName)
-            where TPage : PageObject<TDriver, TPage>, new()
+        public static string GetAttributeValue<TPage>(this IElementOn<TPage> element, string attributeName)
+            where TPage : PageObject<TPage>, new()
         {
             return element.Context.DomChecker.GetAttributeValue(element, attributeName);
         }
 
-        public static ITestContext<TExpectedResultantPage> PressEnterWithPageNavigation
-            <TDriver, TExpectedSourcePage, TExpectedResultantPage>(
-            this ElementOn<TDriver, TExpectedSourcePage> element)
-            where TExpectedSourcePage : PageObject<TDriver, TExpectedSourcePage>, new()
-            where TExpectedResultantPage : PageObject<TDriver, TExpectedResultantPage>, new()
+        public static string GetCssStyleValue<TPage>(this IElementOn<TPage> element, string cssStyleName)
+            where TPage : PageObject<TPage>, new()
         {
-            return
-                element.Context.BrowserActionPerformer.PressEnterWithPageNavigation<TDriver, TExpectedSourcePage, TExpectedResultantPage>(
-                    element);
+            return element.Context.DomChecker.GetStyleValue(element, cssStyleName);
         }
 
-        public static ITestContext<TDriver, TPage> AndWaitFor<TDriver, TPage>(this ITestContext<TDriver, TPage> context,
+        public static ITestContext<TPage> AndWaitFor<TPage>(this ITestContext<TPage> context,
                                                       TimeSpan timeSpan,
                                                       string reason)
-            where TPage : PageObject<TDriver, TPage>, new()
+            where TPage : PageObject<TPage>, new()
         {
-            Ensure.That<ArgumentNullException>(timeSpan > TimeSpan.Zero, "timespan not supplied.");
+            if (timeSpan <= TimeSpan.Zero)
+            {
+                throw new ArgumentException("timespan");
+            }
 
             Thread.Sleep(timeSpan);
 
             return context;
         }
 
-        public static ElementOn<TDriver, TPage> AndWaitFor<TDriver, TPage>(this ElementOn<TDriver, TPage> element,
+        public static IElementOn<TPage> AndWaitFor<TPage>(this IElementOn<TPage> element,
                                                           TimeSpan timeSpan)
-            where TPage : PageObject<TDriver, TPage>, new()
+            where TPage : PageObject<TPage>, new()
         {
-            Ensure.That<NHelpfulException.FrameworkExceptions.ArgumentNullException>(timeSpan > TimeSpan.Zero, "timespan not supplied.");
+            if (timeSpan <= TimeSpan.Zero)
+            {
+                throw new ArgumentException("timespan");
+            }
 
             Thread.Sleep(timeSpan);
 
             return element;
         }
 
-        public static ITestContext<TDriver, TPage> AndWaitFor<TDriver, TPage>(this ITestContext<TDriver, TPage> context,
-                                                      Func<ITestContext<TDriver, TPage>, bool> waitFor,
+        public static ITestContext<TPage> AndWaitFor<TPage>(this ITestContext<TPage> context,
+                                                      Func<ITestContext<TPage>, bool> waitFor,
                                                       TimeSpan maxTimeToWaitFor)
-            where TPage : PageObject<TDriver, TPage>, new()
+            where TPage : PageObject<TPage>, new()
         {
-            Ensure.That<NHelpfulException.FrameworkExceptions.ArgumentNullException>(maxTimeToWaitFor > TimeSpan.Zero,
-                                               "timespan not supplied.");
-            Ensure.That<ArgumentNullException>(waitFor != null, "wait for not supplied.");
+            if (maxTimeToWaitFor <= TimeSpan.Zero)
+            {
+                throw new ArgumentException("maxTimeToWaitFor");
+            }
+
+            if (waitFor == null)
+            {
+                throw new ArgumentException("waitFor");
+            }
 
             const int pollingSleep = 100;
             var stopwatch = new Stopwatch();
@@ -161,48 +203,47 @@ namespace NPageObject.Extensions
         }
 
         /// <summary>
-        /// 	Attempts to select the option with the specified text from a drop down box.
+        /// Attempts to select the option with the specified text from a drop down box.
         /// </summary>
-        public static TPage SelectOption<TDriver, TPage>(this ElementOn<TDriver, TPage> element, string optionText)
-            where TPage : PageObject<TDriver, TPage>, new()
+        public static TPage SelectOption<TPage>(this IElementOn<TPage> element, string optionText)
+            where TPage : PageObject<TPage>, new()
         {
             return element.Context.BrowserActionPerformer.SelectFromDropDown(element, optionText);
         }
 
-        public static TPage SelectOption<TDriver, TPage>(this ElementOn<TDriver, TPage> element, int optionIndex)
-            where TPage : PageObject<TDriver, TPage>, new()
+        public static TPage SelectOption<TPage>(this IElementOn<TPage> element, int optionIndex)
+            where TPage : PageObject<TPage>, new()
         {
-            return element.Context.BrowserActionPerformer.SelectFromDropDown(element, optionIndex);
+            element.Context.BrowserActionPerformer.SelectFromDropDown(element, optionIndex);
+
+            //is this neccessary?
+            return new TPage
+            {
+                Context = element.Context.SetExpectedPage<TPage>()
+            };
         }
 
-        public static bool IsChecked<TDriver, TPage>(this IElementOn<TDriver, TPage> element)
-            where TPage : PageObject<TDriver, TPage>, new()
+        public static bool IsChecked<TPage>(this IElementOn<TPage> element)
+            where TPage : PageObject<TPage>, new()
         {
             return element.Context.DomChecker.GetAttributeValue(element, "checked") == "checked" ||
                    element.Context.DomChecker.GetAttributeValue(element, "checked") == "true";
         }
 
-        public static bool TextContains<TDriver, TPage>(this IElementOn<TDriver, TPage> element, string text)
-        where TPage : PageObject<TDriver, TPage>, new()
-        {
-            return element.Context.DomChecker.TextContains(element, text);
-        }
-
-
-        public static bool IsVisible<TDriver, TPage>(this IElementOn<TDriver, TPage> element)
-        where TPage : PageObject<TDriver, TPage>, new()
+        public static bool IsVisible<TPage>(this IElementOn<TPage> element)
+        where TPage : PageObject<TPage>, new()
         {
             return element.Context.DomChecker.IsVisible(element);
         }
 
-        public static bool SelectedOptionIs<TDriver, TPage>(this IElementOn<TDriver, TPage> element, string text)
-            where TPage : PageObject<TDriver, TPage>, new()
+        public static bool SelectedOptionIs<TPage>(this IElementOn<TPage> element, string text)
+            where TPage : PageObject<TPage>, new()
         {
             return element.Context.DomChecker.GetDropDownListSelectedItemText(element).Equals(text, StringComparison.InvariantCultureIgnoreCase);
         }
 
-        public static bool IsEnabled<TDriver, TPage>(this IElementOn<TDriver, TPage> element)
-            where TPage : PageObject<TDriver, TPage>, new()
+        public static bool IsEnabled<TPage>(this IElementOn<TPage> element)
+            where TPage : PageObject<TPage>, new()
         {
             return element.Context.DomChecker.GetAttributeValue(element, "disabled") != "disabled";
         }

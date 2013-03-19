@@ -1,4 +1,5 @@
 using System;
+using NPageObject.Reliability;
 
 namespace NPageObject.Extensions
 {
