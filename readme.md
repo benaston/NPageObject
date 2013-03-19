@@ -48,8 +48,7 @@ public class ExampleTest
 							  .PwdTextField
 							  .InputText("password")
 							  .LoginButton
-							  .ClickWithNavigation<HomePage>()
-							  .CurrentPage;
+							  .ClickWithNavigation<HomePage>();
 
 		Assert.That(page.MatchesActualBrowserLocation());
 	}
@@ -149,8 +148,7 @@ For example:
 							  .PwdTextField
 							  .InputText("password")
 							  .LoginButton
-							  .ClickWithNavigation<HomePage>()
-							  .CurrentPage;
+							  .ClickWithNavigation<HomePage>();
 
 		Assert.That(page.MatchesActualBrowserLocation());
 	}
