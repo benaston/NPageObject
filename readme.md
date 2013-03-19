@@ -1,6 +1,10 @@
 NPageObject
 =====
 
+![Alt text](./how-it-works.png "How NPageObject works")
+
+*Please note: the instructions below are now out of date (but should still be of some use).*
+
 A page object framework for .NET. Page objects promote locality of reference, DRY-up your acceptance tests and reduce brittleness. It makes your code more maintainable.
 
 Example of use:
