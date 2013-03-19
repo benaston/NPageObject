@@ -18,15 +18,15 @@ public class LoginPage : PageObject<LoginPage>
 	public override string IdentifyingText { get { return "Example identifying text" } }
 
 	public IElementOn<LoginPage> UsernameTextField 	{
-		get { return new PageObjectElement<LoginPage>(Context, selector: "#username"); }
+		get { return new ElementOn<LoginPage>(Context, selector: "#username"); }
 	}
 
 	public IElementOn<LoginPage> PwdTextField {
-		get { return new PageObjectElement<LoginPage>(Context, selector: "#password"); }
+		get { return new ElementOn<LoginPage>(Context, selector: "#password"); }
 	}
 
 	public IElementOn<LoginPage> LoginButton {
-		get { return new PageObjectElement<LoginPage>(Context, selector: "#loginButton"); }
+		get { return new ElementOn<LoginPage>(Context, selector: "#loginButton"); }
 	}
 }
 
