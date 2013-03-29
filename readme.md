@@ -135,7 +135,7 @@ public class ExampleTest
 ```
 
 
-**3. Write your test, optionally using one of the provided custom NUnit constraints**
+**3. Write your test**
 
 For example:
 
