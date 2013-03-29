@@ -5,6 +5,8 @@ NPageObject
 
 A page object framework for .NET. Page objects promote locality of reference, DRY-up your acceptance tests and reduce brittleness. It makes your code more maintainable.
 
+If you like NPageObject, please let others know by <a href="https://twitter.com/share?text=Check%20out%20NPageObject%2C%20a%20simple%20.NET%20page%20object%20framework.%20%23NPageObject%20%40benastontweet&url=https%3A%2F%2Fgithub.com%2Fbenaston%2FNPageObject" target="_blank">sending a tweet</a> (opens a form in a new window to send a tweet).
+
 Example of use:
 
 ```C#
